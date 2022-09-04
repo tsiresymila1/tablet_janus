@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 style="fill:white"
+	 id="Capa_1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:svg="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" inkscape:version="0.91 r13725" sodipodi:docname="home-3.svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 123.307 595.281 595.275" enable-background="new 0 123.307 595.281 595.275" xml:space="preserve">
+<sodipodi:namedview  id="namedview13" showgrid="false" pagecolor="#ffffff" inkscape:cx="297.6405" objecttolerance="10" inkscape:zoom="0.3964554" borderopacity="1" bordercolor="#666666" guidetolerance="10" gridtolerance="10" inkscape:cy="297.63751" inkscape:window-maximized="0" inkscape:current-layer="Capa_1" inkscape:window-y="142" inkscape:window-x="509" inkscape:window-height="480" inkscape:window-width="852" inkscape:pageshadow="2" inkscape:pageopacity="0">
+	</sodipodi:namedview>
+<path id="path3" d="M590.161,394.931L297.636,123.305L5.121,394.931c-4.12,3.835-4.365,10.292-0.53,14.422
+	c3.814,4.121,10.291,4.355,14.412,0.53l33.851-31.434v340.136h489.564V378.44l33.854,31.435c1.959,1.825,4.455,2.724,6.943,2.724
+	c2.744,0,5.467-1.092,7.467-3.254C594.526,405.223,594.282,398.766,590.161,394.931z M522.02,698.187H379.364
+	c-1.967,0.383-3.99,0.592-6.057,0.592c-0.271,0-0.541-0.014-0.813-0.021c-1.051,0.111-2.109,0.189-3.188,0.189
+	c-2.516,0-4.967-0.311-7.328-0.873c-1.063-0.051-2.111-0.154-3.146-0.309v0.422h-121.13c-0.629,0.215-1.267,0.416-1.922,0.598
+	c-6.412,1.764-13.397,1.301-19.739-0.957v0.359H73.252V359.5l224.384-208.361L522.02,359.5V698.187z"/>
+<g class="red" style="fill:red">
+	<path d="M186.052,482.037c32.457,5.449,61.938,20.809,85.474,44.346c23.537,23.535,38.772,53.019,44.348,85.473
+		c1.36,8.177,8.423,13.876,16.474,13.876c0.992,0,1.857-0.123,2.85-0.25c9.166-1.484,15.237-10.157,13.75-19.321
+		c-6.688-39.269-25.27-75.068-53.637-103.438c-28.366-28.366-64.168-46.947-103.435-53.636c-9.166-1.487-17.714,4.582-19.324,13.625
+		S176.886,480.55,186.052,482.037z"/>
+	<g>
+		<path d="M455.107,601.329C444.082,536.667,413.61,477.824,366.785,431c-46.822-46.825-105.664-77.296-170.326-88.321
+			c-9.043-1.61-17.589,4.583-19.201,13.625c-1.487,9.168,4.583,17.715,13.751,19.325c57.723,9.787,110.372,37.163,152.238,78.908
+			c41.869,41.87,69.123,94.519,78.909,152.242c1.364,8.174,8.423,13.872,16.476,13.872c0.99,0,1.855-0.123,2.848-0.245
+			C450.523,619.043,456.716,610.37,455.107,601.329z"/>
+	</g>
+	<path fill="none" stroke-width="30" stroke-linecap="round" stroke-miterlimit="10" d="M239.149,607.387
+		c0-26.862-23.806-48.602-53.224-48.602"/>
+</g>
+</svg>

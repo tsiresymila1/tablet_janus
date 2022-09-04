@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Capa_1"
+   x="0px"
+   y="0px"
+   style="fill:white"
+   viewBox="0 123.307 595.281 595.275"
+   enable-background="new 0 123.307 595.281 595.275"
+   xml:space="preserve"
+   sodipodi:docname="music-playerSelected.svg"
+   inkscape:version="0.91 r13725"
+   inkscape:export-filename="C:\Users\Adrien\Desktop\Documentation\Visioconsult\serveur\nvp-visioconsult\tablet\src\assets\images\icons\music-playerSelected.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"><metadata
+     id="metadata11"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs9" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1058"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="0.5"
+     inkscape:cx="-67.3595"
+     inkscape:cy="297.63751"
+     inkscape:window-x="1592"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Capa_1" /><path
+     style="fill:#ff0000"
+     d="m 238.11328,251.64844 c -1.12597,7.24268 1.44373,38.68282 1.23438,45.94531 104.18755,-13.48202 208.37469,-26.96723 312.5625,-40.44727 1.6976,-7.14783 -1.61558,-34.5939 -2.42188,-41.77734 z"
+     id="path2"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccccc" /><path
+     style="fill:#1c2833;fill-opacity:1"
+     d="m 562.64648,123.31445 c -113.151,14.66955 -226.40533,28.84309 -339.44336,44.15821 -8.54977,3.45311 -6.92518,13.77838 -6.73632,21.05859 0,124.73698 0,249.47396 0,374.21094 -32.92741,-39.32047 -92.84771,-49.77328 -137.994693,-27.28652 -34.909834,16.17155 -60.298254,54.01111 -56.576328,92.98484 3.0131,37.5379 30.925961,69.61084 65.620121,82.43078 44.71555,17.37468 100.22999,5.04953 130.49387,-33.11738 15.28153,-18.92728 22.04794,-43.51932 19.91308,-67.62498 0.45407,-103.92655 0.0513,-207.85423 0.19043,-311.78127 3.203,-1.42692 0.18296,-5.96863 0.89044,-8.62058 -0.9537,-5.41309 -0.2534,-11.18552 -0.23419,-16.42435 -2.10171,-6.99519 0.35178,-14.48199 -0.65625,-21.65429 0,-21.53451 0,-43.06901 0,-64.60352 104.62481,-13.53796 209.24982,-27.07429 313.875,-40.60937 0.10693,31.33913 -0.16686,62.80697 0.0469,94.06445 1.70366,13.22771 -0.84929,26.47868 -0.14844,39.8125 0.31562,58.05817 -0.011,116.11818 0.10156,174.17773 -26.70689,-31.89398 -71.88281,-45.04866 -111.57201,-36.38636 -36.69502,7.35365 -69.96148,34.65589 -80.11042,71.41304 -8.8296,29.98613 0.99856,63.80718 22.23321,86.04754 34.13043,37.10067 93.586,44.90335 137.54742,21.43162 29.25392,-14.96629 50.85111,-44.55633 53.33999,-77.66189 0.70695,-26.45949 -0.11035,-53.44447 0.18653,-80.0959 -0.10463,-102.6108 0.39327,-205.26676 -0.31612,-307.84961 -1.16458,-4.68446 -5.81368,-8.24549 -10.6504,-8.07422 z m -95.61914,313.85938 c 35.10619,0.0462 71.48698,21.71622 82.08594,56.30469 9.36405,28.90562 -4.52306,61.8708 -29.32422,78.4082 -38.07228,27.43285 -97.53089,20.85245 -126.43164,-16.91602 -19.33552,-23.87804 -19.25562,-61.04721 0.51172,-84.67187 17.17569,-22.02844 45.55979,-33.67342 73.1582,-33.125 z M 131.46289,545.40625 c 35.01958,0.0307 71.20936,21.5374 82.03485,55.92268 9.29235,28.39906 -3.73687,61.01928 -27.7829,77.75505 C 148.17732,707.25283 88.71739,701.6866 58.984375,664.67188 39.038766,641.24837 38.032006,603.99682 57.332031,579.86328 74.356799,557.00241 103.3302,544.8521 131.46289,545.40625 Z"
+     id="path4"
+     inkscape:connector-curvature="0" /></svg>
