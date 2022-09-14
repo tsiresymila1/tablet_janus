@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:janus_client/janus_client.dart';
+import 'package:tablet_janus/core/utils/utils.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../injector.dart';
 import '../bloc/call/call_bloc.dart';
-import '../widgets/button_widget.dart';
 
 class MakeCallScreen extends StatefulWidget {
   const MakeCallScreen({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class MakeCallScreen extends StatefulWidget {
 }
 
 class _MakeCallScreenState extends State<MakeCallScreen> {
+  List<String> userNameDisplayMap = [];
   final RTCVideoRenderer _localRenderer = RTCVideoRenderer();
   final RTCVideoRenderer _remoteVideoRenderer = RTCVideoRenderer();
   final TextEditingController nameController = TextEditingController();
@@ -23,6 +25,7 @@ class _MakeCallScreenState extends State<MakeCallScreen> {
   bool isFront = true;
   JanusVideoCallPlugin? videoCallPlugin;
   bool isCalling = false;
+  String currentUser = "";
 
   Future initializeRemoteVideo() async {
     await _remoteVideoRenderer.initialize();
@@ -33,8 +36,10 @@ class _MakeCallScreenState extends State<MakeCallScreen> {
   }
 
   Future<void> cleanUpWebRTCStuff() async {
-    _localRenderer.srcObject = null;
-    _remoteVideoRenderer.srcObject = null;
+    setState(() {
+      _localRenderer.srcObject = null;
+      _remoteVideoRenderer.srcObject = null;
+    });
     _localRenderer.dispose();
     _remoteVideoRenderer.dispose();
   }
@@ -48,6 +53,43 @@ class _MakeCallScreenState extends State<MakeCallScreen> {
     setState(() {
       isCalling = false;
     });
+  }
+
+  bool isMe(data){
+    var username = GetStorage().read('user');
+    return data['username'] == username;
+  }
+
+  void handleRoomData(Map<dynamic, dynamic>? data) {
+    if (data != null) {
+      if (data['textroom'] == 'leave') {
+        setState(() {
+          Future.delayed(const Duration(seconds: 1)).then((value) {
+            userNameDisplayMap.remove(data['username']);
+          });
+        });
+
+      }
+      if (data['textroom'] == 'join') {
+        if(!isMe(data)){
+          setState(() {
+            userNameDisplayMap.remove(data['username']);
+            userNameDisplayMap.add(data['username']);
+          });
+        };
+      }
+      if (data['participants'] != null) {
+        setState(() {
+          userNameDisplayMap = [];
+        });
+        for (var element in (data['participants'] as List<dynamic>)) {
+          setState(() {
+            userNameDisplayMap.add(element['username']);
+          });
+        }
+      }
+    }
+    logInfo(userNameDisplayMap);
   }
 
   @override
@@ -74,7 +116,9 @@ class _MakeCallScreenState extends State<MakeCallScreen> {
     return BlocConsumer<CallBloc, CallState>(
       bloc: sl.get<CallBloc>()..add(CallGetVideoRoomEvent()),
       listener: (context, state) async {
-        if (state is CallVideoRoomState) {
+        if (state is CallTextRoomState) {
+          handleRoomData(state.message);
+        } else if (state is CallVideoRoomState) {
           setState(() {
             videoCallPlugin = state.videoCallPlugin;
           });
@@ -104,16 +148,18 @@ class _MakeCallScreenState extends State<MakeCallScreen> {
               isCalling = true;
             });
           } else if (state.data is VideoCallHangupEvent) {
+            setState(() {
+              userNameDisplayMap = [];
+            });
             await destroy();
           }
-        }  else if(state is CallErrorState){
+        } else if (state is CallErrorState) {
           setState(() {
             isCalling = false;
             destroy();
           });
-        }
-        else if(state is CallRotatedCameraState){
-          if(videoCallPlugin != null){
+        } else if (state is CallRotatedCameraState) {
+          if (videoCallPlugin != null) {
             setState(() {
               isCalling = true;
               _localRenderer.srcObject =
@@ -123,58 +169,46 @@ class _MakeCallScreenState extends State<MakeCallScreen> {
         }
       },
       builder: (context, state) => Scaffold(
+        appBar: !isCalling? AppBar(
+          title: const Text("Contact"),
+        ): null,
+        drawer: const Drawer(),
         body: Stack(children: [
           !isCalling
               ? Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: SizedBox(
-                            width: 400,
-                            child: TextField(
-                              controller: nameController,
-                              decoration: InputDecoration(
-                                  hintText: "Name",
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide:
-                                      const BorderSide(width: 1, color: Colors.teal)),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide:
-                                          const BorderSide(width: 1,color: Colors.teal)),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView.builder(
+                        itemCount: userNameDisplayMap.length,
+                        itemBuilder: (context, index) {
+                          var user = userNameDisplayMap[index] ;
+                          return Card(
+                            margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                            child: ListTile(
+                              leading: const Icon(Icons.person),
+                              title: Text(user ?? ""),
+                              trailing: IconButton(
+                                icon: const Icon(
+                                  Icons.call,
+                                  color: Colors.green,
+                                ),
+                                onPressed: () {
+                                  nameController.text = user ?? "";
+                                  _localRenderer.initialize().then((value) {
+                                    context
+                                        .read<CallBloc>()
+                                        .add(CallInitMediaEvent());
+                                    setState(() {
+                                      isCalling = true;
+                                    });
+                                  });
+                                },
                               ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: 200,
-                            child: ButtonWidget(
-                              title: "Call",
-                              onPress: () async {
-                                _localRenderer.initialize().then((value) {
-                                  context
-                                      .read<CallBloc>()
-                                      .add(CallInitMediaEvent());
-                                  setState(() {
-                                    isCalling = true;
-                                  });
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
+                          );
+                        }),
+                  ))
               : Stack(
                   children: [
                     Stack(
@@ -241,12 +275,12 @@ class _MakeCallScreenState extends State<MakeCallScreen> {
                             backgroundColor: Colors.teal,
                             radius: 30,
                             child: IconButton(
-                                icon: const Icon(Icons.flip_camera_android_sharp),
+                                icon:
+                                    const Icon(Icons.flip_camera_android_sharp),
                                 color: Colors.white,
                                 onPressed: () async {
-                                  context
-                                      .read<CallBloc>()
-                                      .add(CallRotateCameraEvent(front: !isFront));
+                                  context.read<CallBloc>().add(
+                                      CallRotateCameraEvent(front: !isFront));
                                   setState(() {
                                     isFront = !isFront;
                                   });

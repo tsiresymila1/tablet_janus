@@ -39,3 +39,8 @@ class CallErrorState extends CallState {
 class CallRotatedCameraState extends CallState{
 
 }
+
+class CallTextRoomState extends CallState {
+  final Map message;
+  CallTextRoomState({required this.message});
+}

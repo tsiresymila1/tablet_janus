@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,6 +21,9 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   late WebSocketJanusTransport ws;
   late JanusSession session;
   late JanusVideoCallPlugin videoCallPlugin;
+  late JanusTextRoomPlugin textRoomPlugin;
+  int room = 1234;
+
 
   CallBloc() : super(CallInitial()) {
     on<CallInitEvent>((event, emit) {
@@ -98,6 +102,10 @@ class CallBloc extends Bloc<CallEvent, CallState> {
       emit(CallRotatedCameraState());
     });
 
+    on<CallTextRoomEvent>((event,emit){
+        emit(CallTextRoomState(message: event.message));
+    });
+
     add(CallInitEvent());
   }
 
@@ -116,15 +124,20 @@ class CallBloc extends Bloc<CallEvent, CallState> {
         isUnifiedPlan: true);
     session = await j.createSession();
     videoCallPlugin = await session.attach<JanusVideoCallPlugin>();
+    //setup text room
+    textRoomPlugin = await session.attach<JanusTextRoomPlugin>();
+    await textRoomPlugin.setup();
+
     // remote track listener
     videoCallPlugin.remoteTrack?.listen((event) async {
-      logInfo("Janus remote track avalaible");
+      logInfo("Janus remote track available");
       if (event.track != null && event.flowing == true) {
         add(CallRemoteTrackEvent(event: event));
       }
     });
     //message listener
     videoCallPlugin.typedMessages?.listen((even) async {
+      logInfo("Typed message : ${jsonEncode(even.event.plugindata)}");
       Object data = even.event.plugindata?.data;
       if(data is VideoCallIncomingCallEvent){
         FlutterRingtonePlayer.play(
@@ -140,6 +153,17 @@ class CallBloc extends Bloc<CallEvent, CallState> {
       }
       else if( data is VideoCallAcceptedEvent){
         FlutterRingtonePlayer.stop();
+      }
+      else if(data is VideoCallRegisteredEvent){
+        textRoomPlugin.onData?.listen((event) {
+          if (RTCDataChannelState.RTCDataChannelOpen == event) {
+            textRoomPlugin.joinRoom(room, data.result!.username ?? getUuid().v4());
+          }
+        });
+        textRoomPlugin.data?.listen((event) {
+          add(CallTextRoomEvent(message:parse(event.text)));
+          logInfo("TextRoom : ${jsonEncode(parse(event.text))}");
+        });
       }
       add(CallTypedMessageEvent(data: data,jsep: even.jsep));
       videoCallPlugin.handleRemoteJsep(even.jsep);

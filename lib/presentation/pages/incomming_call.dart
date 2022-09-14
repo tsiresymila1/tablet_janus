@@ -38,8 +38,10 @@ class _IncomingCallScreenState extends State<IncomingCallScreen> {
   }
 
   Future<void> cleanUpWebRTCStuff() async {
-    _localRenderer.srcObject = null;
-    _remoteVideoRenderer.srcObject = null;
+    setState(() {
+      _localRenderer.srcObject = null;
+      _remoteVideoRenderer.srcObject = null;
+    });
     _localRenderer.dispose();
     _remoteVideoRenderer.dispose();
   }

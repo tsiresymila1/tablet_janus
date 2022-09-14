@@ -73,3 +73,9 @@ class CallRotateCameraEvent extends CallEvent{
 class CallRotatedCameraEvent extends CallEvent{
 
 }
+
+class CallTextRoomEvent extends CallEvent {
+  final Map message;
+
+  CallTextRoomEvent({required this.message});
+}
